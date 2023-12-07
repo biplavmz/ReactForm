@@ -1,0 +1,54 @@
+import { useState } from "react";
+import "./styles.css";
+
+export default function App() {
+  const [formData, setFormData] = useState({
+    name: "",
+    age: "",
+  });
+
+  const [showData, setShowData] = useState({});
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const submit = () => {
+    setShowData(formData);
+  };
+
+  return (
+    <div className="App">
+      <div>
+        <label>
+          Name:
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+          />
+        </label>
+        <br />
+        <label>
+          Age:
+          <input
+            type="number"
+            name="age"
+            value={formData.age}
+            onChange={handleInputChange}
+          />
+        </label>
+        <button onClick={submit}>Submit</button>
+        <div>
+          <p>Name: {showData.name}</p>
+          <p>Age: {showData.age}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
